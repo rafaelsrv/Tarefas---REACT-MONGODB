@@ -4,7 +4,7 @@ import './styles.css'
 import './styles-priority.css'
 import api from '../../services/api';
 
-function Notes({data, handleDelete}){
+function Notes({data, handleDelete, handleChangePriority}){
   const [changedNote, setChangedNote] = useState('');
 
   function handleEdit(e, priority){
@@ -22,7 +22,7 @@ function Notes({data, handleDelete}){
   async function handleSave(e, notes){
     e.style.cursor = 'default';
     e.style.boxShadow = 'none'
-    if (changedNote && changedNote != notes){
+    if (changedNote && changedNote !== notes){
       await api.post(`/contents/${data._id}`,{
         notes: changedNote,
          })
@@ -51,7 +51,9 @@ function Notes({data, handleDelete}){
             onBlur={e => handleSave(e.target, data.notes)} //Quando clicar fora. - occurs when an object loses focus
             />
             <span>
-                <AiOutlineExclamationCircle size="20"/>
+                <AiOutlineExclamationCircle 
+                size="20"
+                onClick={()=> handleChangePriority(data._id)}/>
             </span>
         </li>
 

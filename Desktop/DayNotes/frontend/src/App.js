@@ -11,32 +11,55 @@ import Notes from './Components/Notes'
 
 
 
+
 function App() {
 
   
-
+  
   const [title, setTitle] = useState('');
   const [notes, setNotes] = useState('');
   const [allNotes, setAllNotes] = useState([])
+  
+
+  async function loadNotes(option){
+    const params = {priority: option};
+    const response = await api.get('/priorities', {params});
+
+    if(response){
+      setAllNotes(response.data);
+    }
+  }
+
+  
 
   useEffect(() =>{
 
-    async function getAllNotes(){
-      const response = await api.get('/annotations', )
-
-      setAllNotes(response.data)
-    }
-
     getAllNotes()
   },[])
+  
+  async function getAllNotes(){
+    const response = await api.get('/annotations', )
+
+    setAllNotes(response.data)
+  }
 
   async function handleDelete(id){
-
+    
     const deletedNote = await api.delete(`/annotations/${id}`);
 
     if(deletedNote){
-      setAllNotes(allNotes.filter(note => note._id != id));
+      setAllNotes(allNotes.filter(note => note._id !== id));
     }
+  }
+
+  async function handleChangePriority(id){
+    const note = await api.post(`/priorities/${id}`);
+
+    if(note){
+      getAllNotes();
+
+    }
+
   }
 
   async function handleSubmit(e){
@@ -104,7 +127,8 @@ function App() {
             <Notes 
             key={data._id}
             data={data}
-            handleDelete={handleDelete}/> 
+            handleDelete={handleDelete}
+            handleChangePriority={handleChangePriority}/> 
           ))}
           
            
