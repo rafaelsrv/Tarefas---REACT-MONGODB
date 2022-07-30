@@ -21,17 +21,22 @@ aside strong{
 }
 aside form{
     margin-top: 30px;
+    
 
 }
 
 aside form .input-block{
     margin-top: 20px;
+    
+    
 }
 aside form .input-block label{
     color: #acacac;
     font-size: 14px;
     font-weight: bold;
-    display:block
+    display:block;
+    padding-left: 10px;
+    
 }
 
 aside form .input-block input{
@@ -41,6 +46,7 @@ aside form .input-block input{
     color: #666;
     border: 0;
     border-bottom: 1px solid #eee;
+    padding-left: 10px;
 }
 
 aside form .input-block textarea{
@@ -53,12 +59,13 @@ aside form .input-block textarea{
     border-bottom: 1px solid #eee;
     background: #fff;
     resize: none;
+    padding-left: 10px;
 
 }
 
 aside button[type=submit]{
     width: 100%;
-    border: 0;
+    border: 5;
     margin-top: 30px;
     background: #ffd3ca;
     padding: 15px 20px;
@@ -66,5 +73,6 @@ aside button[type=submit]{
     font-weight: bold;
     color: #fff;
     cursor: pointer;
+    border-radius: 60%
 
 }

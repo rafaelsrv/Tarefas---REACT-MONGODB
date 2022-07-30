@@ -4,6 +4,7 @@ import './global.css'
 import './sidebar.css'
 import './app.css'
 import './main.css'
+import RadioButtons from './Components/RadioButton'
 import Notes from './Components/Notes'
 
 
@@ -41,12 +42,28 @@ function App() {
     setTitle("")
     setNotes("")
 
+    setAllNotes([...allNotes, response.data])
+
   }
+
+  useEffect(() => {
+    function enableSubmitButton(){
+      let btn = document.getElementById('btn_submit')
+      btn.style.background = '#FFD3CA'
+      if(title && notes){
+        btn.style.background = '#EB8F7A'
+      }
+    }
+    enableSubmitButton()
+  },[title,notes])
+
+
   return (
 
     <div id="app">
       <aside>
         <strong>Caderno de notas</strong>
+        
         
         <form onSubmit={handleSubmit}>
 
@@ -64,8 +81,8 @@ function App() {
               value = {notes}
               onChange = {e => setNotes(e.target.value)}/>
             </div>
-
-            <button type="submit">Salvar</button>
+            <RadioButtons/>
+            <button id="btn_submit" type="submit">Salvar</button>
           </div>
 
         </form>
